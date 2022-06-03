@@ -1,7 +1,25 @@
-import React from "react";
+import React,{useEffect, useState} from "react";
 import {View, Text, StyleSheet, Image} from 'react-native';
+import { ScrollView } from "react-native-gesture-handler";
 import BottomAppBar from "../components/BottomAppBar";
 import HeaderBar from "../components/HeaderBar";
+import { initializeApp } from 'firebase/app';
+import { getDatabase, ref, onValue, get, child } from "firebase/database";
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Sensor Page Code Base
+
 
 
 const Images = {
@@ -24,13 +42,49 @@ const SensorScreen = (props) =>{
             </View>
 
                 <Text style={styles.requiredVal}>10</Text>
-                <Text style={styles.currentVal}>15</Text>
+                <Text style={styles.currentVal}>{props.sensorDatabaseData}</Text>
         </View>
     );
 };
 
 
+
+ 
 const Sensor = () =>{
+//Firebase Configuration and Initialization
+const firebaseConfig = {
+    apiKey: "AIzaSyAwkM3xZcDEqVlnUfcBXcFSfU2pJYFr3hs",
+    authDomain: "ankit-91cbd.firebaseapp.com",
+    databaseURL: "https://ankit-91cbd-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "ankit-91cbd",
+    storageBucket: "ankit-91cbd.appspot.com",
+    messagingSenderId: "1089140225964",
+    appId: "1:1089140225964:web:7efb46f402b8ae048eac09",
+    measurementId: "G-D30F1GQDP6"
+  };
+
+const app = initializeApp(firebaseConfig);
+
+const [sensorData, setData] = useState({});
+useEffect(()=>{
+
+    const dbRef = ref(getDatabase());
+    get(child(dbRef, 'Farm 2/')).then((snapshot) => {
+      if (snapshot.exists()) {
+        console.log("--------------------");
+        setData(snapshot.val());
+        console.log(snapshot.val());
+        console.log("--------------------");
+      } else {
+        console.log("No data available");
+      }
+    }).catch((error) => {
+      console.error(error);
+    });
+
+},[]);
+
+    
     return(
         <View style={styles.container}>
             <HeaderBar icon="arrow-left"/>
@@ -44,14 +98,16 @@ const Sensor = () =>{
             </View>
 
             <View style={styles.wrapper}>
-                <SensorScreen image="water" sense="जलवायु की नमी"/>
-                <SensorScreen image="thermo" sense="तापमान"/>
-                <SensorScreen image="soil" sense="मिट्टी की नमी"/>
-                <SensorScreen image="N" sense="नाइट्रोजन"/>
-                <SensorScreen image="tempSense" sense="मिट्टी का तापमान"/>
-                <SensorScreen image="P" sense="फ़ास्फ़रोस"/>
-                <SensorScreen image="testTube" sense="मिट्टी का पीएच"/>
-                <SensorScreen image="K" sense="पोटैशियम"/>
+                <ScrollView showsVerticalScrollIndicator={false}>
+                <SensorScreen image="water" sense="जलवायु की नमी" sensorDatabaseData={sensorData["Humidity:"]}/>
+                <SensorScreen image="thermo" sense="तापमान" sensorDatabaseData={sensorData["Temperature:"]}/>
+                <SensorScreen image="soil" sense="मिट्टी की नमी" sensorDatabaseData={sensorData["Soil Moisture:"]}/>
+                <SensorScreen image="N" sense="नाइट्रोजन" sensorDatabaseData={sensorData["Nitrogen:"]}/>
+                <SensorScreen image="tempSense" sense="मिट्टी का तापमान" sensorDatabaseData={sensorData["Soil Temperature:"]}/>
+                <SensorScreen image="P" sense="फ़ास्फ़रोस" sensorDatabaseData={sensorData["Phosphorous:"]}/>
+                <SensorScreen image="testTube" sense="मिट्टी का पीएच" sensorDatabaseData={sensorData["Ph Value:"]}/>
+                <SensorScreen image="K" sense="पोटैशियम" sensorDatabaseData={sensorData["Potassium:"]}/>
+                </ScrollView>
             </View>
 
             <BottomAppBar/>
@@ -91,7 +147,8 @@ const styles = StyleSheet.create({
         fontSize:20,
     },
     wrapper:{
-        paddingHorizontal:10
+        paddingHorizontal:10,
+        flex:5
     },
     item:{
         backgroundColor:'rgba(196,196,196,0.17)',

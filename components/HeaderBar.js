@@ -13,7 +13,9 @@ const HeaderBar = (props) =>{
         if(name=="arrow-left")
             navigation.goBack();
         else
-            console.log('Drawer Open Button Clicked !!!!');
+        {
+            navigation.openDrawer();
+        }    
     };
 
     return(
@@ -24,7 +26,7 @@ const HeaderBar = (props) =>{
                     <Feather name={props.icon} size={30} color="black"/>
                 </TouchableOpacity>
                 
-                <Text style={styles.headerName}>MMMUT-MEITy Project</Text>
+                <Text style={styles.headerName}>कृषि सहज</Text>
             </View>
             
         </View>
@@ -35,7 +37,7 @@ const styles = StyleSheet.create({
     headerContainer:{
         width:'100%',
         height:'12%',
-        paddingTop:50,
+        paddingTop:45,
         backgroundColor:'#fff',
         paddingHorizontal:20,
         elevation:8,
