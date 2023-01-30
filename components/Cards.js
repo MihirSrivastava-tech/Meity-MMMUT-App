@@ -5,12 +5,13 @@ import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
 
 const Cards = () => {
     const navigation = useNavigation();
+    
     return(
         <View style={styles.cardsContainer}>
             {/* Row 1 */}
             <View style={styles.row}>
 
-                <TouchableOpacity style={styles.card} onPress={()=>navigation.navigate('Info')}>
+                <TouchableOpacity style={styles.card} onPress={()=>navigation.navigate('Info',{vName:'banana'})}>
                     <View style={styles.cardData}>
                         <Image source={require('../assets/bananaImg.png')}/>
                         <Text style={styles.vegName}>केला</Text>
@@ -18,7 +19,7 @@ const Cards = () => {
                 </TouchableOpacity>
 
 
-                <TouchableOpacity style={styles.card} onPress={()=>navigation.navigate('Info')}>
+                <TouchableOpacity style={styles.card} onPress={()=>navigation.navigate('Info',{vName:'tomato'})}>
                     <View style={styles.cardData}>
                         <Image source={require('../assets/tomatoImg.png') } style={{marginBottom:10}}/>
                         <Text style={styles.vegName}>टमाटर</Text>
@@ -30,7 +31,7 @@ const Cards = () => {
             {/* Row 2 */}
             <View style={styles.row}>
 
-                <TouchableOpacity style={styles.card} onPress={()=>navigation.navigate('Info')}>
+                <TouchableOpacity style={styles.card} onPress={()=>navigation.navigate('Info',{vName:'chilli'})}>
                     <View style={styles.cardData}>
                         <Image source={require('../assets/chilliImg.png')}/>
                         <Text style={styles.vegName}>मिर्च</Text>
@@ -38,7 +39,7 @@ const Cards = () => {
                 </TouchableOpacity>
 
 
-                <TouchableOpacity style={styles.card} onPress={()=>navigation.navigate('Info')}>
+                <TouchableOpacity style={styles.card} onPress={()=>navigation.navigate('Info',{vName:'cauli'})}>
                     <View style={styles.cardData}>
                         <Image source={require('../assets/cauliImg.png')}/>
                         <Text style={styles.vegName}>गोभी</Text>
@@ -50,7 +51,7 @@ const Cards = () => {
             {/* Row 3 */}
             <View style={styles.row}>
 
-                <TouchableOpacity style={styles.card} onPress={()=>navigation.navigate('Info')}>
+                <TouchableOpacity style={styles.card} onPress={()=>navigation.navigate('Info',{vName:'brinjal'})}>
                     <View style={styles.cardData}>
                         <Image source={require('../assets/brinjalImg.png')} />
                         <Text style={styles.vegName}>बैंगन</Text>

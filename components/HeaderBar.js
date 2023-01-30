@@ -26,7 +26,7 @@ const HeaderBar = (props) =>{
                     <Feather name={props.icon} size={30} color="black"/>
                 </TouchableOpacity>
                 
-                <Text style={styles.headerName}>कृषि सहज</Text>
+                <Text style={styles.headerName}>सहज कृषक</Text>
             </View>
             
         </View>

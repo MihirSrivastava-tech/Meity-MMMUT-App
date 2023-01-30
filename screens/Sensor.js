@@ -41,7 +41,7 @@ const SensorScreen = (props) =>{
                 <Text style={styles.sensorName}>{props.sense}</Text>
             </View>
 
-                <Text style={styles.requiredVal}>10</Text>
+                <Text style={styles.requiredVal}>13</Text>
                 <Text style={styles.currentVal}>{props.sensorDatabaseData}</Text>
         </View>
     );
@@ -53,21 +53,21 @@ const SensorScreen = (props) =>{
 const Sensor = () =>{
 //Firebase Configuration and Initialization
 const firebaseConfig = {
-    apiKey: "AIzaSyAwkM3xZcDEqVlnUfcBXcFSfU2pJYFr3hs",
-    authDomain: "ankit-91cbd.firebaseapp.com",
-    databaseURL: "https://ankit-91cbd-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "ankit-91cbd",
-    storageBucket: "ankit-91cbd.appspot.com",
-    messagingSenderId: "1089140225964",
-    appId: "1:1089140225964:web:7efb46f402b8ae048eac09",
-    measurementId: "G-D30F1GQDP6"
+    apiKey: "AIzaSyDMyMcnWCWaP_HuwFxFSMmHe89b9st4YVY",
+    authDomain: "sensors-data-4fb16.firebaseapp.com",
+    databaseURL: "https://sensors-data-4fb16-default-rtdb.firebaseio.com",
+    projectId: "sensors-data-4fb16",
+    storageBucket: "sensors-data-4fb16.appspot.com",
+    messagingSenderId: "197748863048",
+    appId: "1:197748863048:web:a9c8247563dfff18c7687d",
+    measurementId: "G-WRFC55F2ET" 
   };
 
 const app = initializeApp(firebaseConfig);
 
 const [sensorData, setData] = useState({});
 useEffect(()=>{
-
+    console.log('Started');
     const dbRef = ref(getDatabase());
     get(child(dbRef, 'Farm 2/')).then((snapshot) => {
       if (snapshot.exists()) {
@@ -76,7 +76,7 @@ useEffect(()=>{
         console.log(snapshot.val());
         console.log("--------------------");
       } else {
-        console.log("No data available");
+        console.log("No data available"); 
       }
     }).catch((error) => {
       console.error(error);
@@ -104,7 +104,7 @@ useEffect(()=>{
                 <SensorScreen image="soil" sense="मिट्टी की नमी" sensorDatabaseData={sensorData["Soil Moisture:"]}/>
                 <SensorScreen image="N" sense="नाइट्रोजन" sensorDatabaseData={sensorData["Nitrogen:"]}/>
                 <SensorScreen image="tempSense" sense="मिट्टी का तापमान" sensorDatabaseData={sensorData["Soil Temperature:"]}/>
-                <SensorScreen image="P" sense="फ़ास्फ़रोस" sensorDatabaseData={sensorData["Phosphorous:"]}/>
+                <SensorScreen image="P" sense="फॉसफोरस" sensorDatabaseData={sensorData["Phosphorous:"]}/>
                 <SensorScreen image="testTube" sense="मिट्टी का पीएच" sensorDatabaseData={sensorData["Ph Value:"]}/>
                 <SensorScreen image="K" sense="पोटैशियम" sensorDatabaseData={sensorData["Potassium:"]}/>
                 </ScrollView>

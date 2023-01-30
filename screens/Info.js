@@ -3,14 +3,17 @@ import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import HeaderBar from "../components/HeaderBar";
 import BottomAppBar from "../components/BottomAppBar";
 import { useNavigation } from "@react-navigation/native";
+import details from "../components/vegDetails";
 
-
-const InfoLayout = () => {
+const InfoLayout = (props) => {
+    const vegieName = props.vegname;
+    console.log(vegieName);
     const navigation = useNavigation();
+    
     return(
         <View style={styles.infoContainer}>
-            <Text style={styles.heading}>सब्जी का नाम</Text>
-            <Text style={styles.paragraph}>बैगन (अंग्रेज़ी: Brinjal) एक सब्जी है। बैंगन भारत में ही पैदा हुआ और आज आलू के बाद दूसरी सबसे अधिक खपत वाली सब्जी है। विश्व में चीन (54 प्रतिशत) के बाद भारत बैंगन की दूसरी सबसे अधिक पैदावार (27 प्रतिशत) वाले देश हैं। यह देश में 5.5 लाख हेक्टेयर क्षेत्रफल में उगाया जाता है।</Text>
+            <Text style={styles.heading}>{details[vegieName].name}</Text>
+            <Text style={styles.paragraph}>{details[vegieName].description}</Text>
             <Text style={styles.heading}>सब्जी में होने वाले रोग</Text>
             <Text style={styles.headingDisease}>रोग 1-</Text>
             <Text style={styles.paragraph}>बैगन (अंग्रेज़ी: Brinjal) एक सब्जी है। बैंगन भारत में ही पैदा हुआ और आज आलू के बाद दूसरी सबसे अधिक खपत वाली सब्जी है। विश्व में चीन (54 प्रतिशत) के बाद भारत बैंगन की दूसरी सबसे अधिक पैदावार (27 प्रतिशत) वाले देश हैं। यह देश में 5.5 लाख हेक्टेयर क्षेत्रफल में उगाया जाता है।</Text>
@@ -24,12 +27,13 @@ const InfoLayout = () => {
     );
 };
 
-const Info = () =>{
+const Info = ({route}) =>{
+    
     return(
         <View style={styles.container}>
         <HeaderBar icon={"arrow-left"}/>
 
-        <InfoLayout/>
+        <InfoLayout vegname={route.params.vName}/>
 
         <BottomAppBar/>
         </View>
